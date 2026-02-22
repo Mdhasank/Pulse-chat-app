@@ -7,6 +7,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Basic pass-through for now to satisfy PWA criteria
-  event.respondWith(fetch(event.request));
+  // Only handle same-origin requests — let cross-origin API/socket calls pass through natively
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(fetch(event.request));
+  }
 });

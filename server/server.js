@@ -21,8 +21,10 @@ const io = new Server(httpServer, {
   },
 });
 
+const CLIENT_URL = (process.env.CLIENT_URL || "http://localhost:5173").replace(/\/$/, "");
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
+  origin: CLIENT_URL,
   credentials: true,
 }));
 app.use(express.json());
